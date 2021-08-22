@@ -20,6 +20,8 @@ body {
   background: inherit;
   color: inherit;
   margin: inherit;
+  /* force display as block - display:flex causes cursor navigation issues */
+  display: block !important;
 }
 .mceContentBody {
   height: inherit;
