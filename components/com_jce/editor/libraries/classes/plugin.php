@@ -238,7 +238,7 @@ class WFEditorPlugin extends JObject
         $document = WFDocument::getInstance();
 
         if ($document->get('standalone') === 0) {
-            $document->addScript(array('tiny_mce_popup'), 'tiny_mce');
+            $document->addScript(array('popup.min'), 'tiny_mce');
         }
 
         $document->addScript(array('jquery.min'), 'jquery');
