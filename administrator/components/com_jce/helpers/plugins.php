@@ -48,7 +48,7 @@ abstract class JcePluginsHelper
             if ($data) {
                 foreach ($data as $name => $attribs) {
                     // skip if the plugin file is missing
-                    if (!is_file(WF_EDITOR_PLUGINS . '/' . $name . '/editor_plugin.js')) {
+                    if (!is_file(WF_EDITOR_PLUGINS . '/' . $name . '/plugin.min.js')) {
                         continue;
                     }
 
@@ -80,7 +80,7 @@ abstract class JcePluginsHelper
                     if ($data) {
                         foreach ($data as $name => $attribs) {
                             // skip if the plugin file is missing
-                            if (!is_file(WF_EDITOR_PLUGINS . '/' . $name . '/editor_plugin.js')) {
+                            if (!is_file(WF_EDITOR_PLUGINS . '/' . $name . '/plugin.min.js')) {
                                 continue;
                             }
                             // update attributes
@@ -133,7 +133,7 @@ abstract class JcePluginsHelper
                         }
 
                         // check for editor_plugins.js file
-                        if (!is_file($path . '/editor_plugin.js')) {
+                        if (!is_file($path . '/editor_plugin.js') && !is_file($path . '/plugin.min.js')) {
                             continue;
                         }
 
