@@ -381,7 +381,7 @@ class WFLanguageParser extends JObject
         // clean data
         $data = rtrim(trim($data), ',');
 
-        return 'tinyMCE.addI18n({"' . $tag . '":{' . $data . '}});';
+        return 'wfe.addI18n({"' . $tag . '":{' . $data . '}});';
     }
 
     public function output($data)
