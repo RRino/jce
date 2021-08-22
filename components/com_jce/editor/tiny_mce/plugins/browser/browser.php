@@ -123,7 +123,7 @@ class WFBrowserPlugin extends WFMediaManager
                     $settings['callback'] = $callback;
                 }
 
-                $document->addScriptDeclaration('tinymce.settings=' . json_encode($settings) . ';');
+                $document->addScriptDeclaration('wfe.settings=' . json_encode($settings) . ';');
             }
 
             $document->addScript(array('popup.min'), 'plugins');

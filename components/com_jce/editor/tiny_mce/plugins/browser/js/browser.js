@@ -16,10 +16,10 @@
 
         $('#cancel').on('click', function (e) {
             e.preventDefault();
-            tinyMCEPopup.close();
+            wfePopup.close();
         });
 
-        var ed = tinyMCEPopup.editor, src = tinyMCEPopup.getWindowArg('value');
+        var ed = wfePopup.editor, src = wfePopup.getWindowArg('value');
 
         Wf.init();
 
@@ -29,7 +29,7 @@
 
         if (src) {
             src = ed.convertURL(src);
-            $('.uk-button-text', '#insert').text(tinyMCEPopup.getLang('update', 'Update', true));
+            $('.uk-button-text', '#insert').text(wfePopup.getLang('update', 'Update', true));
         }
 
         $('[data-filebrowser]').val(src).filebrowser().on('filebrowser:onfileclick', function (e, file, data) {
@@ -38,12 +38,12 @@
     }
 
     function insert() {
-        var win = tinyMCEPopup.getWindowArg('window');
-        var callback = tinyMCEPopup.getWindowArg('callback');
+        var win = wfePopup.getWindowArg('window');
+        var callback = wfePopup.getWindowArg('callback');
 
         // a callback function of id must exist
         if (!callback) {
-            return tinyMCEPopup.close();
+            return wfePopup.close();
         }
 
         // get selected items
@@ -68,7 +68,7 @@
             }
 
             // close popup window
-            tinyMCEPopup.close();
+            wfePopup.close();
         });
     }
 
