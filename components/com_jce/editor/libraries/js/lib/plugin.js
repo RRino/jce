@@ -10,7 +10,7 @@
 
 // String functions
 (function ($) {
-    var standalone = (typeof tinyMCEPopup === "undefined");
+    var standalone = (typeof wfePopup === "undefined");
 
     // uid counter
     var counter = 0;
@@ -43,7 +43,7 @@
         },
         getURI: function (absolute) {
             if (!standalone) {
-                return tinyMCEPopup.editor.documentBaseURI.getURI(absolute);
+                return wfePopup.editor.documentBaseURI.getURI(absolute);
             }
 
             return (absolute) ? this.options.root : this.options.site;
@@ -105,7 +105,7 @@
 
             // add button actions
             $('#cancel').on('click', function (e) {
-                tinyMCEPopup.close();
+                wfePopup.close();
                 e.preventDefault();
             });
 
@@ -154,7 +154,7 @@
             $('.uk-equalize-checkbox').equalize();
 
             // hide HTML4 only attributes
-            if (tinyMCEPopup.editor.settings.schema === 'html5-strict' && tinyMCEPopup.editor.settings.validate) {
+            if (wfePopup.editor.settings.schema === 'html5-strict' && wfePopup.editor.settings.validate) {
                 $('.html4').hide().find(':input').prop('disabled', true);
             }
 
@@ -224,12 +224,12 @@
                         return;
                     }
 
-                    tinyMCEPopup.close();
+                    wfePopup.close();
                 }
             });
 
             if (!standalone) {
-                var ed = tinyMCEPopup.editor;
+                var ed = wfePopup.editor;
 
                 if (ed.onUpdateMedia) {
                     function updateMedia(before, after) {
@@ -265,14 +265,14 @@
         },
         getPath: function (plugin) {
             if (!standalone) {
-                return tinyMCEPopup.editor.plugins[this.getName()].url;
+                return wfePopup.editor.plugins[this.getName()].url;
             }
 
             return this.options.site + 'components/com_jce/editor/tiny_mce/plugins/' + this.getName();
         },
         loadLanguage: function () {
             if (!standalone) {
-                var ed = tinyMCEPopup.editor,
+                var ed = wfePopup.editor,
                     u = ed.getParam('document_base_url') + 'components/com_jce/editor/tiny_mce';
 
                 if (u && ed.settings.language && ed.settings.language_load !== false) {
@@ -286,7 +286,7 @@
             }
         },
         help: function () {
-            var ed = tinyMCEPopup.editor;
+            var ed = wfePopup.editor;
 
             ed.windowManager.open({
                 url: ed.getParam('site_url') + 'index.php?option=com_jce&task=plugin.display&plugin=help&lang=' + ed.settings.language + '&section=editor&category=' + this.getName(),
@@ -300,7 +300,7 @@
 
         createColourPickers: function () {
             var self = this,
-                ed = tinyMCEPopup.editor,
+                ed = wfePopup.editor,
                 doc = ed.getDoc();
 
             $('input.color, input.colour').each(function () {
@@ -467,7 +467,7 @@
                 $('<button class="uk-icon uk-icon-' + map[filter] + ' uk-button uk-button-link" title="' + self.translate('browse', 'Browse for Files') + '" aria-label="' + self.translate('browse', 'Browse for Files') + '"></button>').on('click', function (e) {
                     e.preventDefault();
 
-                    return tinyMCEPopup.execCommand('mceFileBrowser', true, {
+                    return wfePopup.execCommand('mceFileBrowser', true, {
                         "callback": callback || $(input).attr('id'),
                         "value": input.value,
                         "filter": $(this).attr('data-filter') || filter,
@@ -560,53 +560,31 @@
             }
         },
         translate: function (s, ds) {
-            return tinyMCEPopup.getLang('dlg.' + s, ds || s);
+            return wfePopup.getLang('dlg.' + s, ds || s);
         }
     };
 
     /**
      * Cookie Functions
      */
-    Wf.Cookie = {
+    Wf.Storage = {
         /**
-         * Gets the raw data of a cookie by name.
+         * Gets the raw data of a sessionStorage item by name.
          *
          * @method get
-         * @param {String} n Name of cookie to retrive.
+         * @param {String} n Name of item to retrive.
          * @param {String} s Default value to return.
-         * @param {Function} fn Function to validate cookie value against, return default if false
-         * @return {String} Cookie data string.
-         * @copyright Copyright 2009, Moxiecode Systems AB
-         * @licence GNU / LGPL - http://www.gnu.org/copyleft/lesser.html
+         * @param {Function} fn Function to validate value against, return default if false
+         * @return {String} Data string.
          */
         get: function (n, s, fn) {
-            var c = document.cookie,
-                e, p = n + "=",
-                b, v;
-
-            // Strict mode
-            if (!c) {
+            if (!window.sessionStorage) {
                 return s;
             }
 
-            b = c.indexOf("; " + p);
+            var val = sessionStorage.getItem(n);
 
-            if (b == -1) {
-                b = c.indexOf(p);
-
-                if (b != 0) {
-                    return s;
-                }
-            } else {
-                b += 2;
-            }
-            e = c.indexOf(";", b);
-
-            if (e == -1) {
-                e = c.length;
-            }
-
-            v = unescape(c.substring(b + p.length, e));
+            v = unescape(val);
 
             if (typeof v == 'undefined') {
                 return s;
@@ -619,24 +597,18 @@
             return v;
         },
         /**
-         * Sets a raw cookie string.
+         * Sets a raw sessionStorage string.
          *
          * @method set
-         * @param {String} n Name of the cookie.
-         * @param {String} v Raw cookie data.
-         * @param {Date} e Optional date object for the expiration of the cookie.
-         * @param {String} p Optional path to restrict the cookie to.
-         * @param {String} d Optional domain to restrict the cookie to.
-         * @param {String} s Is the cookie secure or not.
-         * @copyright Copyright 2009, Moxiecode Systems AB
-         * @licence GNU / LGPL - http://www.gnu.org/copyleft/lesser.html
+         * @param {String} n Name of the item.
+         * @param {String} v Raw item data.
          */
-        set: function (n, v, e, p, d, s) {
-            document.cookie = n + "=" + escape(v) +
-                ((e) ? "; expires=" + e.toGMTString() : "") +
-                ((p) ? "; path=" + escape(p) : "") +
-                ((d) ? "; domain=" + d : "") +
-                ((s) ? "; secure" : "");
+        set: function (n, v) {
+            if (!window.sessionStorage) {
+                return;
+            }
+
+            sessionStorage.setItem(n, v);
         }
 
     };

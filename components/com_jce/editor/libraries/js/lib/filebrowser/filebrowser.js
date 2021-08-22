@@ -1258,7 +1258,7 @@
 
         _setState: function (name, state) {
             if (this.options.use_state_cookies) {
-                Wf.Cookie.set("wf_" + Wf.getName() + '_' + name, state);
+                Wf.Storage.set("wf_" + Wf.getName() + '_' + name, state);
             }
         },
 
@@ -1268,7 +1268,7 @@
             }
 
             callback = callback || function (val) { return val; }
-            return Wf.Cookie.get('wf_' + Wf.getName() + '_' + name, def, callback);
+            return Wf.Storage.get('wf_' + Wf.getName() + '_' + name, def, callback);
         },
 
         /**
@@ -2914,12 +2914,12 @@
 
             // Size
             if ($(item).data('size')) {
-                $('.uk-comment-header', info).append('<div class="uk-comment-meta" id="info-size">' + tinyMCEPopup.getLang('dlg.size', 'Size') + ': ' + Wf.String.formatSize($(item).data('size')) + '</div>');
+                $('.uk-comment-header', info).append('<div class="uk-comment-meta" id="info-size">' + wfePopup.getLang('dlg.size', 'Size') + ': ' + Wf.String.formatSize($(item).data('size')) + '</div>');
             }
 
             // Modified
             if ($(item).data('modified')) {
-                $('.uk-comment-header', info).append('<div class="uk-comment-meta" id="info-modified">' + tinyMCEPopup.getLang('dlg.modified', 'Modified') + ': ' + Wf.String.formatDate($(item).data('modified'), self.options.date_format) + '</div>');
+                $('.uk-comment-header', info).append('<div class="uk-comment-meta" id="info-modified">' + wfePopup.getLang('dlg.modified', 'Modified') + ': ' + Wf.String.formatDate($(item).data('modified'), self.options.date_format) + '</div>');
             }
 
             if (comments) {
@@ -2947,7 +2947,7 @@
 
                         // Duration (will only apply to file items)
                         if (data.duration) {
-                            $('.uk-comment-header', info).append('<div class="uk-comment-meta" id="info-duration">' + tinyMCEPopup.getLang('dlg.duration', 'Duration') + ': ' + data.duration + '</div>');
+                            $('.uk-comment-header', info).append('<div class="uk-comment-meta" id="info-duration">' + wfePopup.getLang('dlg.duration', 'Duration') + ': ' + data.duration + '</div>');
                         }
 
                         self._trigger('onFileDetails', [item, data]);

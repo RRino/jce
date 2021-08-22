@@ -4,7 +4,7 @@
         var each = tinymce.each, filtered = {};
 
         function isAllowedStylesheet(href) {
-            var styleselect = tinyMCEPopup.editor.getParam('styleselect_stylesheet');
+            var styleselect = wfePopup.editor.getParam('styleselect_stylesheet');
 
             if (!styleselect) {
                 return true;
@@ -38,7 +38,7 @@
              */
             getClasses: function () {
                 var self = this,
-                    ed = tinyMCEPopup.editor,
+                    ed = wfePopup.editor,
                     cl = [],
                     i, lo = {},
                     f = ed.settings.class_filter,
@@ -128,7 +128,7 @@
             },
 
             fillClassList: function (id) {
-                var self = this, ed = tinyMCEPopup.editor,
+                var self = this, ed = wfePopup.editor,
                     lst = document.getElementById(id), values = [], filter = ed.settings.class_filter;
 
                 if (!lst) {

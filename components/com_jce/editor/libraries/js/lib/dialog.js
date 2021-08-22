@@ -1,6 +1,4 @@
 (function ($) {
-
-
     $.extend(Wf, {
         /**
          * Get common attribute types
@@ -9,8 +7,8 @@
          * @returns {String|Integer}
          */
         getAttrib: function (e, at) {
-            var ed = tinyMCEPopup.editor,
-                v, v2;
+            var ed = wfePopup.editor,
+                v;
 
             switch (at) {
                 case 'width':
@@ -135,8 +133,7 @@
          * Set / update styles on a sample image, eg: <img src="image.jpg" id="sample" />
          */
         setStyles: function () {
-            var self = this,
-                ed = tinyMCEPopup.editor,
+            var ed = wfePopup.editor,
                 $img = $('#sample');
 
             if (!$img.length) {
@@ -231,7 +228,7 @@
          * Update styles field with style values from a sample image
          */
         updateStyles: function () {
-            var ed = tinyMCEPopup.editor, v, img = new Image(), preview = $('#sample'), k;
+            var ed = wfePopup.editor, v, img = new Image(), preview = $('#sample'), k;
 
             $(img).attr('style', $('#style').val());
             $(img).add(preview).attr('dir', $('#dir').val());
