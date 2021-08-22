@@ -579,6 +579,20 @@ class pkg_jceInstallerScript
             $admin . '/views/cpanel/default_pro.php'
         );
 
+        // clean up tinymce refactor
+        $files['2.9.11'] = array_merge(
+            glob($site . '/editor/tiny_mce/plugins/*/editor_plugin.js'),
+            array(
+                $site . '/editor/tiny_mce/tiny_mce.js',
+                $site . '/editor/tiny_mce/tiny_mce_popup.js',
+                $site . '/editor/tiny_mce/themes/advanced/editor_template.js'
+            )
+        );
+        // remove "none" theme
+        $folders['2.9.11'] = array(
+            $site . '/editor/tiny_mce/themes/none'
+        );
+
         foreach ($folders as $version => $list) {
             // version check
             if (version_compare($version, $current_version, 'gt')) {
