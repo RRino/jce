@@ -194,7 +194,7 @@ WFPopups.addPopup('jcemediabox', {
      * @param {Object} n
      */
     remove: function(n) {
-        var ed = tinyMCEPopup.editor;
+        var ed = wfePopup.editor;
 
         // Cleanup
         $.each(['jcepopup', 'jcelightbox', 'jcebox', 'icon-left', 'icon-right', 'icon-top-left', 'icon-top-right', 'icon-bottom-left', 'icon-bottom-right', 'zoom-left', 'zoom-right', 'zoom-top-left', 'zoom-top-right', 'zoom-bottom-left', 'zoom-bottom-right', 'noicon', 'noshow', 'autopopup-single', 'autopopup-multiple'], function(i, v) {
@@ -253,7 +253,7 @@ WFPopups.addPopup('jcemediabox', {
      * @param {Object} n Popup node
      */
     getAttributes: function(n, index, callback) {
-        var ed = tinyMCEPopup.editor,
+        var ed = wfePopup.editor,
             data = {},
             rv, v;
 
@@ -416,7 +416,7 @@ WFPopups.addPopup('jcemediabox', {
      */
     setAttributes: function(n, args, index) {
         var self = this,
-            ed = tinyMCEPopup.editor;
+            ed = wfePopup.editor;
 
         // set default index
         index = index || 0;

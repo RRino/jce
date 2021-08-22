@@ -47,12 +47,12 @@
         settings: {},
         init: function () {
             var self = this,
-                ed = tinyMCEPopup.editor,
+                ed = wfePopup.editor,
                 se = ed.selection, el;
 
             var api = ed.plugins.link;
 
-            tinyMCEPopup.restoreSelection();
+            wfePopup.restoreSelection();
 
             $('button#insert').on('click', function (e) {
                 self.insert();
@@ -244,7 +244,7 @@
                     state = true;
                 }
 
-                $('.uk-button-text', '#insert').text(tinyMCEPopup.getLang('update', 'Update', true));
+                $('.uk-button-text', '#insert').text(wfePopup.getLang('update', 'Update', true));
 
                 var href = ed.convertURL(ed.dom.getAttrib(anchorElm, 'href'));
 
@@ -321,7 +321,7 @@
         },
 
         getAnchorListHTML: function (id, target) {
-            var ed = tinyMCEPopup.editor,
+            var ed = wfePopup.editor,
                 name;
             var nodes = ed.dom.select('.mce-item-anchor');
 
@@ -356,7 +356,7 @@
             var v = $(n).val();
 
             if (emailRex.test(v) && !/^\s*mailto:/i.test(v)) {
-                Wf.Modal.confirm(tinyMCEPopup.getLang('link_dlg.is_email', 'The URL you entered seems to be an email address, do you want to add the required mailto: prefix?'), function (state) {
+                Wf.Modal.confirm(wfePopup.getLang('link_dlg.is_email', 'The URL you entered seems to be an email address, do you want to add the required mailto: prefix?'), function (state) {
                     if (state) {
                         $(n).val('mailto:' + v);
                     }
@@ -364,7 +364,7 @@
                 });
 
             } else if (/^\s*www./i.test(v)) {
-                Wf.Modal.confirm(tinyMCEPopup.getLang('link_dlg.is_external', 'The URL you entered seems to be an external link, do you want to add the required https:// prefix?'), function (state) {
+                Wf.Modal.confirm(wfePopup.getLang('link_dlg.is_external', 'The URL you entered seems to be an external link, do you want to add the required https:// prefix?'), function (state) {
                     if (state) {
                         $(n).val('https://' + v);
                     }
@@ -377,9 +377,9 @@
         },
 
         insert: function () {
-            tinyMCEPopup.restoreSelection();
+            wfePopup.restoreSelection();
 
-            var ed = tinyMCEPopup.editor;
+            var ed = wfePopup.editor;
 
             if ($('#href').val() == '') {
                 Wf.Modal.alert(ed.getLang('link_dlg.no_href', 'A URL is required. Please select a link or enter a URL'), {
@@ -404,9 +404,9 @@
             return this.checkPrefix($('#href'));
         },
         insertAndClose: function () {
-            tinyMCEPopup.restoreSelection();
+            wfePopup.restoreSelection();
 
-            var ed = tinyMCEPopup.editor,
+            var ed = wfePopup.editor,
                 se = ed.selection,
                 node = se.getNode(),
                 args = {},
@@ -515,7 +515,7 @@
             ed.nodeChanged();
 
             // close dialog
-            tinyMCEPopup.close();
+            wfePopup.close();
         },
         setClasses: function (v) {
             Wf.setClasses(v);
@@ -527,7 +527,7 @@
             $('#classlist').val(v);
         },
         insertLink: function (args) {
-            var url = tinyMCEPopup.editor.documentBaseURI.toRelative(args.url);
+            var url = wfePopup.editor.documentBaseURI.toRelative(args.url);
             $('#href').val(url);
 
             if ($('#text').data('text') == '' && !$('#text').prop('disabled')) {
@@ -535,7 +535,7 @@
             }
         },
         createEmail: function () {
-            var ed = tinyMCEPopup.editor,
+            var ed = wfePopup.editor,
                 fields = '<div class="uk-form-horizontal">';
 
             $.each(['mailto', 'cc', 'bcc', 'subject', 'body'], function (i, name) {
@@ -702,6 +702,6 @@
         }
     };
     window.LinkDialog = LinkDialog;
-    tinyMCEPopup.onInit.add(LinkDialog.init, LinkDialog);
+    wfePopup.onInit.add(LinkDialog.init, LinkDialog);
 
 })(jQuery, tinyMCEPopup);

@@ -11,9 +11,9 @@
     var ImageManagerDialog = {
         settings: {},
         init: function () {
-            tinyMCEPopup.restoreSelection();
+            wfePopup.restoreSelection();
 
-            var ed = tinyMCEPopup.editor,
+            var ed = wfePopup.editor,
                 n = ed.selection.getNode(),
                 self = this,
                 br, el;
@@ -66,7 +66,7 @@
 
             if (n && n.nodeName == 'IMG') {
                 // set button
-                $('.uk-button-text', '#insert').text(tinyMCEPopup.getLang('update', 'Update', true));
+                $('.uk-button-text', '#insert').text(wfePopup.getLang('update', 'Update', true));
 
                 $('#src').val(src);
 
@@ -221,13 +221,13 @@
             $('.uk-datalist').trigger('datalist:update');
         },
         insert: function () {
-            var ed = tinyMCEPopup.editor,
+            var ed = wfePopup.editor,
                 self = this;
 
             var n = ed.selection.getNode();
 
             if ($('#src').val() === '') {
-                Wf.Modal.alert(tinyMCEPopup.getLang('imgmanager_dlg.no_src', 'Please enter a url for the image'));
+                Wf.Modal.alert(wfePopup.getLang('imgmanager_dlg.no_src', 'Please enter a url for the image'));
                 return false;
             }
 
@@ -237,7 +237,7 @@
             }
 
             if ($('#alt').val() === '') {
-                Wf.Modal.confirm(tinyMCEPopup.getLang('imgmanager_dlg.missing_alt'), function (state) {
+                Wf.Modal.confirm(wfePopup.getLang('imgmanager_dlg.missing_alt'), function (state) {
                     if (state) {
                         self.insertAndClose();
                     }
@@ -250,14 +250,14 @@
             }
         },
         insertAndClose: function () {
-            var ed = tinyMCEPopup.editor,
+            var ed = wfePopup.editor,
                 self = this,
                 v, args = {},
                 el, br = '';
 
             Wf.updateStyles();
 
-            tinyMCEPopup.restoreSelection();
+            wfePopup.restoreSelection();
 
             // Fixes crash in Safari
             if (tinymce.isWebKit) {
@@ -350,7 +350,7 @@
 
             ed.nodeChanged();
 
-            tinyMCEPopup.close();
+            wfePopup.close();
         },
 
         selectFile: function (file, data) {
@@ -412,7 +412,7 @@
     };
     window.ImageManagerDialog = ImageManagerDialog;
 
-    //tinyMCEPopup.onInit.add(ImageManagerDialog.init, ImageManagerDialog);
+    //wfePopup.onInit.add(ImageManagerDialog.init, ImageManagerDialog);
     $(document).ready(function () {
         ImageManagerDialog.init();
     });

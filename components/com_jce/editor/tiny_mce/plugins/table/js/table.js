@@ -38,7 +38,7 @@
     }
 
     function getStyle(elm, attrib, style) {
-        var val = tinyMCEPopup.editor.dom.getAttrib(elm, attrib);
+        var val = wfePopup.editor.dom.getAttrib(elm, attrib);
 
         if (val != '') {
             return '' + val;
@@ -48,7 +48,7 @@
             style = attrib;
         }
 
-        return tinyMCEPopup.editor.dom.getStyle(elm, style);
+        return wfePopup.editor.dom.getStyle(elm, style);
     }
 
     function getCSSSize(size) {
@@ -77,7 +77,7 @@
 
     /* Override setStyles function for tables */
     Wf.setStyles = function () {
-        var ed = tinyMCEPopup.editor;
+        var ed = wfePopup.editor;
         // create proxy element to extract styles from
         var $proxy = $('<div />'),
             proxy = $proxy.get(0);
@@ -235,15 +235,15 @@
 
     Wf.updateStyles = function () { };
 
-    var isHTML4 = tinyMCEPopup.editor.settings.schema === "html4";
-    var isHTML5 = tinyMCEPopup.editor.settings.schema === "html5-strict";
+    var isHTML4 = wfePopup.editor.settings.schema === "html4";
+    var isHTML5 = wfePopup.editor.settings.schema === "html5-strict";
 
     var TableDialog = {
         settings: {},
         init: function () {
             var self = this,
-                ed = tinyMCEPopup.editor,
-                layout = tinyMCEPopup.getWindowArg('layout', 'table');
+                ed = wfePopup.editor,
+                layout = wfePopup.getWindowArg('layout', 'table');
 
             if (!this.settings.file_browser) {
                 $('input.browser').removeClass('browser');
@@ -280,7 +280,7 @@
             $('.uk-datalist').trigger('datalist:update');
         },
         insert: function () {
-            var layout = tinyMCEPopup.getWindowArg('layout', 'table');
+            var layout = wfePopup.getWindowArg('layout', 'table');
 
             switch (layout) {
                 case 'table':
@@ -298,10 +298,10 @@
             }
         },
         initMerge: function () {
-            $('#numcols').val(tinyMCEPopup.getWindowArg('cols', 1));
-            $('#numrows').val(tinyMCEPopup.getWindowArg('rows', 1));
+            $('#numcols').val(wfePopup.getWindowArg('cols', 1));
+            $('#numrows').val(wfePopup.getWindowArg('rows', 1));
 
-            $('#insert').button('option', 'label', tinyMCEPopup.getLang('update', 'Update', true));
+            $('#insert').button('option', 'label', wfePopup.getLang('update', 'Update', true));
         },
         updateClasses: function (values) {
             values = values.replace(/(?:^|\s)mce-item-(\w+)(?!\S)/g, '');
@@ -311,10 +311,10 @@
         },
         initTable: function () {
             var self = this,
-                ed = tinyMCEPopup.editor;
+                ed = wfePopup.editor;
 
             var elm = ed.dom.getParent(ed.selection.getNode(), "table");
-            var action = tinyMCEPopup.getWindowArg('action');
+            var action = wfePopup.getWindowArg('action');
 
             if (!action) {
                 action = elm ? "update" : "insert";
@@ -377,7 +377,7 @@
                 this.orgTableWidth = $('#width').val();
                 this.orgTableHeight = $('#height').val();
 
-                $('#insert .uk-button-text').text(tinyMCEPopup.getLang('update', 'Update', true));
+                $('#insert .uk-button-text').text(wfePopup.getLang('update', 'Update', true));
             } else {
                 Wf.setDefaults(this.settings.defaults);
             }
@@ -392,8 +392,8 @@
         },
         initRow: function () {
             var self = this,
-                ed = tinyMCEPopup.editor,
-                dom = tinyMCEPopup.dom;
+                ed = wfePopup.editor,
+                dom = wfePopup.dom;
 
             var elm = dom.getParent(ed.selection.getStart(), "tr");
             var selected = dom.select('td.mceSelected,th.mceSelected', elm);
@@ -434,14 +434,14 @@
 
             // single cell update only
             if (selected.length === 0) {
-                $('#insert .uk-button-text').text(tinyMCEPopup.getLang('update', 'Update', true));
+                $('#insert .uk-button-text').text(wfePopup.getLang('update', 'Update', true));
             } else {
                 $('#action').hide();
             }
         },
         initCell: function () {
             var self = this,
-                ed = tinyMCEPopup.editor,
+                ed = wfePopup.editor,
                 dom = ed.dom;
 
             var elm = dom.getParent(ed.selection.getStart(), "td,th");
@@ -472,7 +472,7 @@
 
                 $('#celltype').val(elm.nodeName.toLowerCase());
 
-                $('#insert .uk-button-text').text(tinyMCEPopup.getLang('update', 'Update', true));
+                $('#insert .uk-button-text').text(wfePopup.getLang('update', 'Update', true));
             } else {
                 $('#action').hide();
             }
@@ -480,19 +480,19 @@
         merge: function () {
             var func;
 
-            tinyMCEPopup.restoreSelection();
-            func = tinyMCEPopup.getWindowArg('onaction');
+            wfePopup.restoreSelection();
+            func = wfePopup.getWindowArg('onaction');
 
             func({
                 cols: $('#numcols').val(),
                 rows: $('#numrows').val()
             });
 
-            tinyMCEPopup.close();
+            wfePopup.close();
         },
 
         getStyles: function () {
-            var dom = tinyMCEPopup.editor.dom;
+            var dom = wfePopup.editor.dom;
 
             var style = $('#style').val();
 
@@ -562,13 +562,13 @@
         },
 
         insertTable: function () {
-            var ed = tinyMCEPopup.editor,
+            var ed = wfePopup.editor,
                 dom = ed.dom;
 
-            tinyMCEPopup.restoreSelection();
+            wfePopup.restoreSelection();
 
             var elm = ed.dom.getParent(ed.selection.getNode(), "table");
-            var action = tinyMCEPopup.getWindowArg('action');
+            var action = wfePopup.getWindowArg('action');
 
             if (!action) {
                 action = elm ? "update" : "insert";
@@ -584,7 +584,7 @@
                 capEl, elm;
 
             if (!AutoValidator.validate($('form').get(0))) {
-                tinyMCEPopup.alert(ed.getLang('invalid_data'));
+                wfePopup.alert(ed.getLang('invalid_data'));
                 return false;
             }
 
@@ -687,7 +687,7 @@
                 // Repaint
                 ed.execCommand('mceRepaint');
 
-                tinyMCEPopup.close();
+                wfePopup.close();
                 return true;
             }
 
@@ -796,11 +796,11 @@
                 skip_undo: true
             });
 
-            tinyMCEPopup.close();
+            wfePopup.close();
         },
         updateCell: function (td, skip_id) {
             var self = this,
-                ed = tinyMCEPopup.editor,
+                ed = wfePopup.editor,
                 dom = ed.dom,
                 doc = ed.getDoc(),
                 v;
@@ -893,11 +893,11 @@
 
         updateCells: function () {
             var self = this,
-                el, ed = tinyMCEPopup.editor,
+                el, ed = wfePopup.editor,
                 inst = ed,
                 tdElm, trElm, tableElm;
 
-            tinyMCEPopup.restoreSelection();
+            wfePopup.restoreSelection();
             el = ed.selection.getStart();
             tdElm = ed.dom.getParent(el, "td,th");
             trElm = ed.dom.getParent(el, "tr");
@@ -913,7 +913,7 @@
                 ed.addVisual();
                 ed.nodeChanged();
                 inst.execCommand('mceEndUndoLevel');
-                tinyMCEPopup.close();
+                wfePopup.close();
                 return;
             }
 
@@ -931,13 +931,13 @@
                             ed.addVisual();
                             ed.nodeChanged();
                             inst.execCommand('mceEndUndoLevel');
-                            tinyMCEPopup.close();
+                            wfePopup.close();
                         }
                     };
 
                     if (ed.getParam("accessibility_warnings", 1)) {
                         if (celltype == "th" && scope == "") {
-                            tinyMCEPopup.confirm(ed.getLang('table_dlg.missing_scope', 'Missing Scope', true), doUpdate);
+                            wfePopup.confirm(ed.getLang('table_dlg.missing_scope', 'Missing Scope', true), doUpdate);
                         } else {
                             doUpdate(1);
                         }
@@ -982,12 +982,12 @@
             ed.addVisual();
             ed.nodeChanged();
             inst.execCommand('mceEndUndoLevel');
-            tinyMCEPopup.close();
+            wfePopup.close();
         },
 
         updateRow: function (tr, skip_id, skip_parent) {
             var self = this,
-                ed = tinyMCEPopup.editor,
+                ed = wfePopup.editor,
                 dom = ed.dom,
                 doc = ed.getDoc(),
                 v;
@@ -1097,12 +1097,12 @@
 
         updateRows: function () {
             var self = this,
-                ed = tinyMCEPopup.editor,
+                ed = wfePopup.editor,
                 dom = ed.dom,
                 trElm, tableElm;
             var action = $('#action').val();
 
-            tinyMCEPopup.restoreSelection();
+            wfePopup.restoreSelection();
             trElm = dom.getParent(ed.selection.getStart(), "tr");
             tableElm = dom.getParent(ed.selection.getStart(), "table");
 
@@ -1122,7 +1122,7 @@
                 ed.addVisual();
                 ed.nodeChanged();
                 ed.execCommand('mceEndUndoLevel');
-                tinyMCEPopup.close();
+                wfePopup.close();
                 return;
             }
 
@@ -1157,7 +1157,7 @@
             ed.addVisual();
             ed.nodeChanged();
             ed.execCommand('mceEndUndoLevel');
-            tinyMCEPopup.close();
+            wfePopup.close();
         },
 
         makeAttrib: function (attrib, value) {
@@ -1214,7 +1214,7 @@
 
     };
 
-    tinyMCEPopup.onInit.add(TableDialog.init, TableDialog);
+    wfePopup.onInit.add(TableDialog.init, TableDialog);
 
     window.TableDialog = TableDialog;
 })(tinymce, tinyMCEPopup, jQuery);

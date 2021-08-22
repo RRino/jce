@@ -39,7 +39,7 @@ var WFPopups = WFExtensions.add('Popups', {
     },
     setup: function (options) {
         var self = this,
-            ed = tinyMCEPopup.editor,
+            ed = wfePopup.editor,
             s = ed.selection,
             n;
 
@@ -67,7 +67,7 @@ var WFPopups = WFExtensions.add('Popups', {
                     $('#popup_text').val(v);
                     $('#popup_text').attr('disabled', false);
                 } else {
-                    $('#popup_text').val(tinyMCEPopup.getLang('dlg.element_selection', 'Element Selection'));
+                    $('#popup_text').val(wfePopup.getLang('dlg.element_selection', 'Element Selection'));
                     $('#popup_text').attr('disabled', true);
                     $('#popup_text').addClass('disabled');
                 }
@@ -108,7 +108,7 @@ var WFPopups = WFExtensions.add('Popups', {
      */
     getPopup: function (n, callback, index) {
         var self = this,
-            ed = tinyMCEPopup.editor;
+            ed = wfePopup.editor;
 
         if (n.nodeName != 'A') {
             n = ed.dom.getParent(n, 'a');
@@ -205,7 +205,7 @@ var WFPopups = WFExtensions.add('Popups', {
      * @param {Object} n Popup / Link node
      */
     setAttributes: function (n, args, index) {
-        var ed = tinyMCEPopup.editor;
+        var ed = wfePopup.editor;
 
         // map values
         if (this.config['map']) {
@@ -226,7 +226,7 @@ var WFPopups = WFExtensions.add('Popups', {
      * @param {Object} n Link element / node
      */
     getAttributes: function (n, callback, index) {
-        var ed = tinyMCEPopup.editor, data;
+        var ed = wfePopup.editor, data;
 
         if (n || n.nodeName != 'A') {
             n = ed.dom.getParent(n, 'a');
@@ -257,7 +257,7 @@ var WFPopups = WFExtensions.add('Popups', {
      */
     createPopup: function (n, args, index) {
         var self = this,
-            ed = tinyMCEPopup.editor;
+            ed = wfePopup.editor;
 
         args = args || {};
 

@@ -1,11 +1,11 @@
-//tinyMCEPopup.requireLangPack();
+//wfePopup.requireLangPack();
 
 var ColorPicker = {
     settings: {},
     init: function() {
         var self = this,
-            ed = tinyMCEPopup.editor,
-            color = tinyMCEPopup.getWindowArg('input_color') || '#FFFFFF',
+            ed = wfePopup.editor,
+            color = wfePopup.getWindowArg('input_color') || '#FFFFFF',
             doc = ed.getDoc();
 
         // get stylesheets from editor
@@ -29,7 +29,7 @@ var ColorPicker = {
         })).on('colorpicker:insert', function() {
             return ColorPicker.insert();
         }).on('colorpicker:close', function() {
-            return tinyMCEPopup.close();
+            return wfePopup.close();
         });
 
         $('button#insert').button({
@@ -47,20 +47,20 @@ var ColorPicker = {
      */
     insert: function() {
         var color = $("#colorpicker_color").val(),
-            f = tinyMCEPopup.getWindowArg('func');
+            f = wfePopup.getWindowArg('func');
 
 
         if (color) {
             color = '#' + color;
         }
 
-        tinyMCEPopup.restoreSelection();
+        wfePopup.restoreSelection();
 
         if (f) {
             f(color);
         }
 
-        tinyMCEPopup.close();
+        wfePopup.close();
     }
 };
-tinyMCEPopup.onInit.add(ColorPicker.init, ColorPicker);
+wfePopup.onInit.add(ColorPicker.init, ColorPicker);

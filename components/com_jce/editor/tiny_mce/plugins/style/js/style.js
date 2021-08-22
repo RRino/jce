@@ -95,7 +95,7 @@
 
             tinymce.each(allStyles, function (style) {
                 if (style !== '') {
-                    var parsedStyles = tinyMCEPopup.editor.dom.parseStyle(style);
+                    var parsedStyles = wfePopup.editor.dom.parseStyle(style);
                     for (var name in parsedStyles) {
                         if (parsedStyles.hasOwnProperty(name)) {
                             if (mergedStyles[name] === undefined) {
@@ -114,7 +114,7 @@
         },
         init: function () {
             var self = this,
-                ed = tinyMCEPopup.editor,
+                ed = wfePopup.editor,
                 ce = document.getElementById('container'),
                 h;
 
@@ -122,7 +122,7 @@
                 $('.browser').removeClass('browser');
             }
 
-            this.existingStyles = this.aggregateStyles(tinyMCEPopup.getWindowArg('styles'));
+            this.existingStyles = this.aggregateStyles(wfePopup.getWindowArg('styles'));
 
             ce.style.cssText = ed.dom.serializeStyle(this.existingStyles);
 
@@ -230,7 +230,7 @@
             $('.uk-datalist').trigger('datalist:update');
         },
         setupFormData: function () {
-            var ed = tinyMCEPopup.editor,
+            var ed = wfePopup.editor,
                 ce = document.getElementById('container'),
                 s, b, i;
 
@@ -485,15 +485,15 @@
 
         applyAction: function () {
             var ce = document.getElementById('container'),
-                ed = tinyMCEPopup.editor;
+                ed = wfePopup.editor;
 
             this.generateCSS();
 
-            tinyMCEPopup.restoreSelection();
+            wfePopup.restoreSelection();
 
-            //ed.dom.setAttrib(ed.selection.getNode(), 'style', tinyMCEPopup.editor.dom.serializeStyle(tinyMCEPopup.editor.dom.parseStyle(ce.style.cssText)));
+            //ed.dom.setAttrib(ed.selection.getNode(), 'style', wfePopup.editor.dom.serializeStyle(wfePopup.editor.dom.parseStyle(ce.style.cssText)));
 
-            var newStyles = tinyMCEPopup.editor.dom.parseStyle(ce.style.cssText);
+            var newStyles = wfePopup.editor.dom.parseStyle(ce.style.cssText);
 
             if (this.applyActionIsInsert) {
 
@@ -515,13 +515,13 @@
             } else {
                 var nodes;
 
-                if (tinyMCEPopup.getWindowArg('applyStyleToBlocks')) {
+                if (wfePopup.getWindowArg('applyStyleToBlocks')) {
                     nodes = ed.selection.getSelectedBlocks();
                 } else {
                     nodes = ed.selection.getNode();
                 }
 
-                ed.dom.setAttrib(nodes, 'style', tinyMCEPopup.editor.dom.serializeStyle(newStyles));
+                ed.dom.setAttrib(nodes, 'style', wfePopup.editor.dom.serializeStyle(newStyles));
             }
 
             ed.undoManager.add();
@@ -530,7 +530,7 @@
 
         updateAction: function () {
             this.applyAction();
-            tinyMCEPopup.close();
+            wfePopup.close();
         },
 
         generateCSS: function () {
@@ -722,7 +722,7 @@
                 addSelectValue(s, "", "");
             }
 
-            ar = tinyMCEPopup.getParam(param, dval).split(sep);
+            ar = wfePopup.getParam(param, dval).split(sep);
 
             for (i = 0; i < ar.length; i++) {
                 se = false;
@@ -774,7 +774,7 @@
         }
     };
 
-    tinyMCEPopup.onInit.add(StyleDialog.init, StyleDialog);
+    wfePopup.onInit.add(StyleDialog.init, StyleDialog);
 
     window.StyleDialog = StyleDialog;
 

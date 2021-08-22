@@ -13,7 +13,7 @@
 		settings: {},
 
 		getAttributes: function (n) {
-			var ed = tinyMCEPopup.editor;
+			var ed = wfePopup.editor;
 
 			var i, attrs = n.attributes, attribs = {};
 
@@ -33,10 +33,10 @@
 		},
 
 		init: function () {
-			var ed = tinyMCEPopup.editor,
+			var ed = wfePopup.editor,
 				se = ed.selection,
 				n = se.getNode(),
-				element = tinyMCEPopup.getWindowArg('element');
+				element = wfePopup.getWindowArg('element');
 
 			// get an element selection
 			if (element) {
@@ -133,15 +133,15 @@
 		},
 
 		insert: function () {
-			var ed = tinyMCEPopup.editor,
+			var ed = wfePopup.editor,
 				se = ed.selection,
 				n = se.getNode(),
 				elm;
 
-			tinyMCEPopup.restoreSelection();
+			wfePopup.restoreSelection();
 
 			// get the element type (opener)
-			var element = tinyMCEPopup.getWindowArg('element');
+			var element = wfePopup.getWindowArg('element');
 
 			var args = {}, attribs = this.getAttributes(n);
 
@@ -204,20 +204,20 @@
 			}
 
 			ed.undoManager.add();
-			tinyMCEPopup.close();
+			wfePopup.close();
 		},
 
 		remove: function () {
-			var ed = tinyMCEPopup.editor;
+			var ed = wfePopup.editor;
 
-			var element = tinyMCEPopup.getWindowArg('element');
+			var element = wfePopup.getWindowArg('element');
 
 			if (element) {
 				ed.formatter.remove(element);
 				ed.undoManager.add();
 			}
 
-			tinyMCEPopup.close();
+			wfePopup.close();
 		},
 
 		insertDateTime: function (id) {
@@ -256,6 +256,6 @@
 	};
 
 	window.XHTMLXtrasDialog = XHTMLXtrasDialog;
-	tinyMCEPopup.onInit.add(XHTMLXtrasDialog.init, XHTMLXtrasDialog);
+	wfePopup.onInit.add(XHTMLXtrasDialog.init, XHTMLXtrasDialog);
 
 })(jQuery);

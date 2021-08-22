@@ -2,7 +2,7 @@
     var URL = {
         toAbsolute: function (url) {
             if (typeof tinyMCEPopup !== "undefined") {
-                return tinyMCEPopup.editor.documentBaseURI.toAbsolute(url);
+                return wfePopup.editor.documentBaseURI.toAbsolute(url);
             }
 
             if (/http(s)?:\/\//.test(url)) {
@@ -13,7 +13,7 @@
         },
         toRelative: function (url) {
             if (typeof tinyMCEPopup !== "undefined") {
-                return tinyMCEPopup.editor.documentBaseURI.toRelative(url);
+                return wfePopup.editor.documentBaseURI.toRelative(url);
             }
 
             if (/http(s)?:\/\//.test(url)) {

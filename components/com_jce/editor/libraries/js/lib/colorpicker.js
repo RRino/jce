@@ -224,7 +224,7 @@
             var v = o.labels[s] || d || '';
 
             if (typeof tinyMCEPopup !== 'undefined') {
-                v = tinyMCEPopup.getLang('colorpicker.' + s, v);
+                v = wfePopup.getLang('colorpicker.' + s, v);
             }
 
             return v;
