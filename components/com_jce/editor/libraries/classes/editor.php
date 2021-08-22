@@ -454,7 +454,7 @@ class WFEditor
             $this->addScript(JURI::base(true) . '/index.php?option=com_jce&task=editor.pack&' . http_build_query((array) $settings['query']));
         } else {
             // Tinymce
-            $this->addScript($this->getURL(true) . '/tiny_mce/tiny_mce.js');
+            $this->addScript($this->getURL(true) . '/tiny_mce/tinymce.min.js');
 
             // Editor
             $this->addScript($this->getURL(true) . '/libraries/js/editor.min.js');
@@ -514,7 +514,8 @@ class WFEditor
         // encode as json string
         $tinymce = json_encode($settings, JSON_NUMERIC_CHECK | JSON_UNESCAPED_SLASHES);
 
-        $this->addScriptDeclaration('try{WFEditor.init(' . $tinymce . ');}catch(e){console.debug(e);}');
+        //$this->addScriptDeclaration('try{document.addEventListener("DOMContentLoaded",function(){WfEditorSettings=.init(' . $tinymce . ')})}catch(e){console.debug(e)}');
+        $this->addScriptDeclaration('var WfEditorSettings=' . $tinymce . ';');
 
         if (is_object($this->profile)) {
             if ($wf->getParam('editor.callback_file')) {
@@ -890,7 +891,7 @@ class WFEditor
                     $items = array_values($items);
 
                     // add to array
-                    $plugins['external'][$name] = JURI::root(true) . '/' . $attribs->url . '/editor_plugin.js';
+                    $plugins['external'][$name] = JURI::root(true) . '/' . $attribs->url . '/plugin.min.js';
                 }
 
                 // remove missing plugins
@@ -899,7 +900,7 @@ class WFEditor
                         return false;
                     }
 
-                    return is_file(WF_EDITOR_PLUGINS . '/' . $item . '/editor_plugin.js');
+                    return is_file(WF_EDITOR_PLUGINS . '/' . $item . '/plugin.min.js');
                 });
 
                 // update core plugins
@@ -1380,11 +1381,11 @@ class WFEditor
                 $files = array();
 
                 // add core file
-                $files[] = WF_EDITOR . '/tiny_mce/tiny_mce' . $suffix . '.js';
+                $files[] = WF_EDITOR . '/tiny_mce/tinymce' . $suffix . '.js';
 
                 // Add themes in dev mode
                 foreach ($themes as $theme) {
-                    $files[] = WF_EDITOR . '/tiny_mce/themes/' . $theme . '/editor_template' . $suffix . '.js';
+                    $files[] = WF_EDITOR . '/tiny_mce/themes/' . $theme . '/theme' . $suffix . '.js';
                 }
 
                 // Add core plugins
@@ -1393,12 +1394,12 @@ class WFEditor
                         continue;
                     }
 
-                    $files[] = WF_EDITOR_PLUGINS . '/' . $plugin . '/editor_plugin' . $suffix . '.js';
+                    $files[] = WF_EDITOR_PLUGINS . '/' . $plugin . '/plugin' . $suffix . '.js';
                 }
 
                 // add external plugins
                 foreach ($plugins['external'] as $plugin => $path) {
-                    $files[] = $path . '/' . $plugin . '/editor_plugin' . $suffix . '.js';
+                    $files[] = $path . '/' . $plugin . '/plugin' . $suffix . '.js';
                 }
 
                 // add Editor file
