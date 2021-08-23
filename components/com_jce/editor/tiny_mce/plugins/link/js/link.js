@@ -7,7 +7,7 @@
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
-(function ($, tinyMCEPopup) {
+(function ($, tinymce) {
     // http://stackoverflow.com/a/46181
     var emailRex = /(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})/;
 
@@ -704,4 +704,4 @@
     window.LinkDialog = LinkDialog;
     wfePopup.onInit.add(LinkDialog.init, LinkDialog);
 
-})(jQuery, tinyMCEPopup);
+})(jQuery, wfe);

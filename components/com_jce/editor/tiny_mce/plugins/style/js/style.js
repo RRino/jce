@@ -1,4 +1,4 @@
-(function (tinymce, tinyMCEPopup, $) {
+(function (tinymce, wfePopup, $) {
 
     function selectByValue(field_name, value, add_custom, ignore_case) {
         if (!value) {
@@ -778,4 +778,4 @@
 
     window.StyleDialog = StyleDialog;
 
-})(tinymce, tinyMCEPopup, jQuery);
+})(wfe, wfePopup, jQuery);

@@ -1,6 +1,5 @@
 (function (win) {
-    // check for tinyMCEPopup
-    if (win.tinyMCEPopup) {
+    if (win.wfePopup) {
         var each = tinymce.each, filtered = {};
 
         function isAllowedStylesheet(href) {

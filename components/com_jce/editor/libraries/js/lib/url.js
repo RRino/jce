@@ -1,7 +1,7 @@
 (function ($, Wf) {
     var URL = {
         toAbsolute: function (url) {
-            if (typeof tinyMCEPopup !== "undefined") {
+            if (typeof wfePopup !== "undefined") {
                 return wfePopup.editor.documentBaseURI.toAbsolute(url);
             }
 
@@ -12,7 +12,7 @@
             return Wf.getURI(true) + url.substr(0, url.indexOf('/'));
         },
         toRelative: function (url) {
-            if (typeof tinyMCEPopup !== "undefined") {
+            if (typeof wfePopup !== "undefined") {
                 return wfePopup.editor.documentBaseURI.toRelative(url);
             }
 

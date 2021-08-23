@@ -7,7 +7,7 @@
  * is derivative of works licensed under the GNU General Public License or
  * other free or open source software licenses.
  */
-(function ($) {
+(function ($, tinymce) {
 
 	var XHTMLXtrasDialog = {
 		settings: {},
@@ -258,4 +258,4 @@
 	window.XHTMLXtrasDialog = XHTMLXtrasDialog;
 	wfePopup.onInit.add(XHTMLXtrasDialog.init, XHTMLXtrasDialog);
 
-})(jQuery);
+})(jQuery, wfe);

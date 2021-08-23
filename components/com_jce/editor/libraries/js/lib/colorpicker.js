@@ -223,7 +223,7 @@
 
             var v = o.labels[s] || d || '';
 
-            if (typeof tinyMCEPopup !== 'undefined') {
+            if (typeof wfePopup !== 'undefined') {
                 v = wfePopup.getLang('colorpicker.' + s, v);
             }
 

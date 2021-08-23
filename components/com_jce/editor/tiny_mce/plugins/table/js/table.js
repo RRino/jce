@@ -1,4 +1,4 @@
-(function (tinymce, tinyMCEPopup, $) {
+(function (tinymce, wfePopup, $) {
     function convertRGBToHex(col) {
         var re = new RegExp("rgb\\s*\\(\\s*([0-9]+).*,\\s*([0-9]+).*,\\s*([0-9]+).*\\)", "gi");
 
@@ -1217,4 +1217,4 @@
     wfePopup.onInit.add(TableDialog.init, TableDialog);
 
     window.TableDialog = TableDialog;
-})(tinymce, tinyMCEPopup, jQuery);
+})(wfe, wfePopup, jQuery);
